@@ -26,7 +26,7 @@ pub fn Divisor(comptime T: type) type {
         kind: Kind,
         shift: u8,
 
-        // Construct divisor.
+        /// Construct divisor.
         pub fn init(divisor: T) Self {
             if (divisor == 0) {
                 @panic("Divisor cannot be zero!");
