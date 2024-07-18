@@ -82,7 +82,11 @@ pub fn Divisor(comptime T: type) type {
         }
 
         test Self {
-            var prng = std.rand.DefaultPrng.init(0);
+            var prng = std.Random.DefaultPrng.init(blk: {
+                var seed: u64 = undefined;
+                try std.posix.getrandom(std.mem.asBytes(&seed));
+                break :blk seed;
+            });
             const random = prng.random();
 
             for (1..100_000) |_| {
